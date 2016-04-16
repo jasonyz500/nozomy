@@ -5,9 +5,9 @@ users can choose questions from a question bank of common or define their own qu
 the most basic ones will be 'what were the highlights of this past week?', 'what were your goals for this past week and did you achieve them?', 'what did you accomplish in the past week?'.
 
 V1 milestones:
-- Main screen: user can log in and respond to a fixed set of questions that I will hard code.
+- Main screen: user can log in and respond to a fixed set of questions that we will hard code.
 - User's responses will be saved to server as he types.
-- On a separate screen, the user can select a date from a dropdown menu and view previous responses for that week.
+- On a separate screen, the user can select a daterange and view previous posts.
 
 data flow design:
 the most basic unit of nozomy is a "reflection", which is basically a key value pair. a reflection can be mapped like this:
@@ -15,7 +15,6 @@ the most basic unit of nozomy is a "reflection", which is basically a key value 
 	_id:
 	user_id:
 	user_name:
-	user_email:
 	reflection_date: 
 	last_edited:
 	reflection_prompt:
@@ -23,7 +22,6 @@ the most basic unit of nozomy is a "reflection", which is basically a key value 
 }
 
 at the end of a week-long cycle, the user will log in and can write responses to questions, anytime within the week. after the week is over that week's responses will expire and a new week starts.
-
 
 web server API design:
 /reflections/fetch
