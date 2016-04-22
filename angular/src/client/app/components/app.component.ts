@@ -7,6 +7,7 @@ import {HomeComponent} from '../+home/index';
 import {AboutComponent} from '../+about/index';
 import {AuthComponent} from '../+auth/index';
 import {ReflectComponent} from '../+reflect/index';
+import 'rxjs/Rx';
 
 @Component({
   selector: 'sd-app',

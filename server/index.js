@@ -3,7 +3,7 @@ var Hapi = require('hapi'),
 
 var server = new Hapi.Server();
    
-server.connection({ port: 8000, host: '0.0.0.0'});
+server.connection({ port: 8000, host: '0.0.0.0', routes: { cors: {"headers": ["Accept", "Authorization", "Content-Type", "If-None-Match", "Accept-language"]}}});
 
 server.route({
 	path: '/', 

@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core';
-import {Http, Headers, RequestOptions, Response} from 'angular2/http';
+import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {createAuthHeaders} from './authenticate-requests';
 
@@ -9,7 +9,7 @@ export class PostsService {
 
   // urlConfig = CONFIG['<%= ENV %>'];
   // urlBase = this.urlConfig.apiServer + ':' + this.urlConfig.apiPort;
-  urlBase = 'localhost:8000';
+  urlBase = 'http://localhost:8000';
 
   getPosts (queryObj: any) {
     // perform some validation on queryObj
