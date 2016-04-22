@@ -13,20 +13,33 @@ module.exports = mongodbClient = function(options) {
 }
 
 mongodbClient.prototype.getAllPosts = function(params, cb) {
-	models.Post.find({post_date: {$gt: params.start_date, $lt:params.end_date}},
+  // console.dir({post_date: {$gt: params.start_date, $lt:params.end_date}})
+   models.Post.find({post_date: {$gt: params.start_date, $lt:params.end_date}},
 
 	   function (err, posts) {
 		   if (err) {
 			   console.error(err);
 			   cb(null);
 		   } else {
+		       console.log('1: posts' + posts)
 			   cb(posts);
+		   }
+	   });
+   models.Post.find({post_date: {$gt: '20160421 16:03:00', $lt:'20160421 18:03:00'}},
+
+	   function (err, posts) {
+		   if (err) {
+			   console.error(err);
+//			   cb(null);
+		   } else {
+		       console.log('2: posts' + posts)
+//			   cb(posts);
 		   }
 	   });
 }
 
 mongodbClient.prototype.getSinglePost = function(id, cb) {
-	models.Chart.findById(id, function(err, post) {
+	models.Post.findById(id, function(err, post) {
 		if (err) {
 			console.error(err);
 			cb(null);

@@ -30,7 +30,7 @@ exports.register = function (server, options, next) {
 
 	server.route({
 		path: '/posts',
-		method: 'GET',
+		method: 'POST',
 		handler: getAllPosts
 	});
 
