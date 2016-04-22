@@ -1,5 +1,6 @@
 import {Component} from 'angular2/core';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
+import {Router} from 'angular2/router';
 
 import {NameListService} from '../../shared/index';
 
@@ -11,7 +12,7 @@ import {NameListService} from '../../shared/index';
 })
 export class HomeComponent {
   newName: string;
-  constructor(public nameListService: NameListService) {}
+  constructor(public nameListService: NameListService, private _router: Router) {}
 
   /*
    * @param newname  any text as input.
@@ -21,5 +22,17 @@ export class HomeComponent {
     this.nameListService.add(this.newName);
     this.newName = '';
     return false;
+  }
+
+  onClickLogin() {
+    this._router.navigate(['Auth']);
+  }
+
+  onClickLogout() {
+    localStorage.removeItem('auth_token');
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('auth_token');
   }
 }

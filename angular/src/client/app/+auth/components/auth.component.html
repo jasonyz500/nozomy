@@ -1,0 +1,15 @@
+<h2>Login</h2>
+<p>Please login to continue.</p>
+<form (ngSubmit)="onClickLogin(username, password)">
+	<div class="form-group">
+		<label>Username</label>
+		<input [(ngModel)]="username" placeholder="username" />
+	</div>
+
+	<div class="form-group">
+		<label>Password</label>
+		<input type="password" [(ngModel)]="password" placeholder="********" />
+	</div>
+
+	<button class="btn btn-primary" (click)="onClickLogin(username, password)" type="submit">Login</button>
+</form>
