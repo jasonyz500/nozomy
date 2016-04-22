@@ -1,0 +1,26 @@
+{
+  "name": "nozomy-service",
+  "version": "0.0.1",
+  "description": "web service for nozomy project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Qing Zou",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "async": "^1.5.0",
+    "boom": ">=2.4.1",
+    "elasticsearch": "8.2.0",
+    "hapi": "13.0.0",
+    "jQuery": ">1.7.2",
+    "joi": ">=5.0.2",
+    "log4js": ">=0.6.14",
+    "moment": "^2.11.2",
+    "mongoose": "^4.4.6",
+    "mysql": ">=2.5.0",
+    "request": "^2.65.0",
+    "swig": "1.3.2",
+    "underscore": "^1.8.3"
+  }
+}
