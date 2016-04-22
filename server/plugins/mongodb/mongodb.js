@@ -13,14 +13,16 @@ module.exports = mongodbClient = function(options) {
 }
 
 mongodbClient.prototype.getAllPosts = function(params, cb) {
-	models.Chart.find(function (err, charts) {
-		if (err) {
-			console.error(err);
-			cb(null);
-		} else {
-			cb(posts);
-		}
-	});
+	models.Post.find({post_date: {$gt: params.start_date, $lt:params.end_date}},
+
+	   function (err, posts) {
+		   if (err) {
+			   console.error(err);
+			   cb(null);
+		   } else {
+			   cb(posts);
+		   }
+	   });
 }
 
 mongodbClient.prototype.getSinglePost = function(id, cb) {
@@ -43,7 +45,7 @@ mongodbClient.prototype.createPost = function(params, cb) {
 			console.error(err);
 			cb(null);
 		} else {
-			console.log("successfully created chart");
+			console.log("successfully created post");
 			cb("successfully created post");
 		}
 	});

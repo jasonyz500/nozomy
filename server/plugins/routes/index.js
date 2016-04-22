@@ -1,7 +1,9 @@
 //route for GET /posts
 function getAllPosts(request, reply) {
 	console.log("get posts payload: "+JSON.stringify(request.payload));
-	mongodb.getAllPosts(request.payload, function(response) {
+	console.log(request.payload.start_date);
+	console.log(request.payload.end_date);
+	mongodb.getAllPosts(request.payload,  function(response) {
 		reply(response);
 	});
 }

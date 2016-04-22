@@ -6,6 +6,7 @@ var models = {};
 var chartSchema = new Schema({
 	user_id: String,
     user_name:String,
+    post_date: String,
 	question: String,
 	moment: String
 });
