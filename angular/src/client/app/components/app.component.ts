@@ -6,6 +6,7 @@ import {NameListService} from '../shared/index';
 import {HomeComponent} from '../+home/index';
 import {AboutComponent} from '../+about/index';
 import {AuthComponent} from '../+auth/index';
+import {ReflectComponent} from '../+reflect/index';
 
 @Component({
   selector: 'sd-app',
@@ -28,6 +29,11 @@ import {AuthComponent} from '../+auth/index';
     path: '/auth',
     name: 'Auth',
     component: AuthComponent
+  },
+  {
+    path: '/reflect',
+    name: 'Reflect',
+    component: ReflectComponent
   }
 ])
 export class AppComponent {}

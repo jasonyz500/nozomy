@@ -1,19 +1,9 @@
 <div *ngIf=isLoggedIn()>
-	<p>
-	  Howdy! Here's a list of awesome computer scientists.
-	  Do you know any others? Add to the list yourself.
-	</p>
-
-	<form (submit)="addName()">
-	  <input [(ngModel)]="newName" placeholder="Awesome Computer Scientist">
-	  <button class="btn btn-primary" type="submit">Add</button>
+	<form (ngSubmit)="onSave()">
+		<h2>{{post.question}}</h2>
+		<textarea cols="40" style="resize: none">{{post.moment}}</textarea>
+		<button class="btn btn-primary" type="submit" (click)=onClickLogout()>Logout</button>
 	</form>
-
-
-	<ul>
-	  <li *ngFor="#name of nameListService.get()">{{name}}</li>
-	</ul>
-	<button class="btn btn-primary" type="submit" (click)=onClickLogout()>Logout</button>
 </div>
 <div *ngIf=!isLoggedIn()>
 	<p>
