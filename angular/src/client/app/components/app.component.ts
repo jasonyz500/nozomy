@@ -6,7 +6,7 @@ import {NameListService} from '../shared/index';
 import {HomeComponent} from '../+home/index';
 import {AboutComponent} from '../+about/index';
 import {AuthComponent} from '../+auth/index';
-import {ReflectComponent} from '../+reflect/index';
+import {VisualizeComponent} from '../+visualize/index';
 import 'rxjs/Rx';
 
 @Component({
@@ -32,9 +32,9 @@ import 'rxjs/Rx';
     component: AuthComponent
   },
   {
-    path: '/reflect',
-    name: 'Reflect',
-    component: ReflectComponent
+    path: '/visualize',
+    name: 'Visualize',
+    component: VisualizeComponent
   }
 ])
 export class AppComponent {}

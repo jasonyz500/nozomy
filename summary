@@ -70,16 +70,18 @@ based on the above data flows we can define the below endpoints and their releva
 
 for the write posts page:
 
-GET /write_page/ => returns a write_page json
+POST /write_page/ => returns a write_page json
 required parameters: {
 	user_id:
 	reflection_cutoff_date: // or this can be week identifier, but i think date is more reliable
 }
+we use this to load the page. we use POST because GET has no query body.
 
 POST /reflections/:id
 {
 	reflection_body:
 }
+we use this to save reflections.
 
 for the visualize page:
 

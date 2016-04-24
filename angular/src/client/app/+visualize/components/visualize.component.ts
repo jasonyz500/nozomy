@@ -5,8 +5,8 @@ import {PostsService} from '../../shared/services/posts.service';
 
 @Component({
   selector: 'sd-reflect',
-  templateUrl: 'app/+reflect/components/reflect.component.html',
-  styleUrls: ['app/+reflect/components/reflect.component.css'],
+  templateUrl: 'app/+visualize/components/visualize.component.html',
+  styleUrls: ['app/+visualize/components/visualize.component.css'],
   directives: [FORM_DIRECTIVES, CORE_DIRECTIVES],
   providers: [PostsService]
 })
