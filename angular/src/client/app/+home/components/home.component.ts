@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   post: any;
 
   onSave() {
+    console.log('saving post', this.post);
     this.postsService.savePost(this.post);
   }
 

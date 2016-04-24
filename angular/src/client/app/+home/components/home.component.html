@@ -1,9 +1,10 @@
 <div *ngIf=isLoggedIn()>
 	<form (ngSubmit)="onSave()">
 		<h2>{{post.question}}</h2>
-		<textarea cols="40" style="resize: none">{{post.moment}}</textarea>
-		<button class="btn btn-primary" type="submit" (click)=onClickLogout()>Logout</button>
+		<textarea [(ngModel)]="post.moment" cols="40" style="resize: none"></textarea>
+		<button class="btn btn-primary" type="submit">Save</button>
 	</form>
+	<button class="btn btn-primary" (click)=onClickLogout()>Logout</button>
 </div>
 <div *ngIf=!isLoggedIn()>
 	<p>

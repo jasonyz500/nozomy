@@ -15,9 +15,10 @@ export class PostsService {
     // perform some validation on queryObj
     let getPostsUrl = this.urlBase + '/posts';
     let options = createAuthHeaders();
+    let body = JSON.stringify(queryObj);
     // TODO: Add error handling
     return this.http
-      .get(getPostsUrl, options)
+      .post(getPostsUrl, body, options)
       .map(res => res.json())
       .catch(this.handleError);
   }

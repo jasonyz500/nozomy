@@ -1,40 +1,118 @@
 nozomy api design
 
+====== EXECUTIVE SUMMARY ======
+
 nozomy is a reflection app which prompts users to write once a week, aiming to show users highlights at the end of the year.
 users can choose questions from a question bank of common or define their own questions.
-the most basic ones will be 'what were the highlights of this past week?', 'what were your goals for this past week and did you achieve them?', 'what did you accomplish in the past week?'.
+the most basic ones will be 'what were the highlights of your week?', 'what were your goals for this past week and did you achieve them?', 'what did you accomplish in the past week?'.
 
-V1 milestones:
-- Main screen: user can log in and respond to a fixed set of questions that we will hard code.
-- User's responses will be saved to server as he types.
-- On a separate screen, the user can select a daterange and view previous posts.
+====== MORE DETAILS =====
 
-data flow design:
-the most basic unit of nozomy is a "reflection", which is basically a key value pair. a reflection can be mapped like this:
+for now we will enforce the once-a-week unit. our weeks will be monday-sunday, which means that every time you log in during the same week you'll see the same homepage with your responses.
+when you log in on a new week, you should automatically get a blank slate of the question-list that you've defined in your settings.
+
+we should aim to allow autosaving, but for now we will have a save button at the bottom where you click to save your responses. however it won't redirect you anywhere.
+
+on a separate tab is the visualize hub. here you should be able to select any number of ways to visualize your previous reflections. for now we will only support one, the "timeline style".
+
+====== DATA MODELS AND FLOWS ======
+
+when you load up your write page, the browser should first request for that week's write homepage. if it doesn't exist, then it should create a new one and return a blank one along with the _id.
+this means that we need to store each user's write page for that week. it can look like this:
+
+write_page:
+{
+	_id:
+	user_id:
+	user_name: (maybe optional):
+	reflection_cutoff_date: // date of the sunday when the reflection will expire
+	reflection_week_number: // maybe optional, just for convenience to log which week of the year
+	reflections: [reflections]
+}
+
+the browser will send a request for that week. meanwhile on the server, if it exists it will return it, otherwise it will create a new one using the user's write settings, and return that one.
+note that we need to store each week, not just one entry for the user, because the user may add or delete questions along the way.
+
+this brings us to the write settings model, which defines which questions are in a user's write page. it could look like this:
+
+write_page_settings:
 {
 	_id:
 	user_id:
 	user_name:
-	reflection_date: 
+	reflection_prompts: ['prompt1?', 'p2', ...],
+	last_updated: 
+}
+
+the only reason we maintain this is so that the web server can create a new homepage on a new week.
+
+the next data structure is the most basic unit, "reflection" which can be mapped like this:
+
+reflection:
+{
+	_id:
+	user_id:
+	user_name:
+	reflection_cutoff_date: 
+	reflection_week_number: 
 	last_edited:
 	reflection_prompt:
 	reflection_body:
 }
 
-at the end of a week-long cycle, the user will log in and can write responses to questions, anytime within the week. after the week is over that week's responses will expire and a new week starts.
+when you write a new reflection and save it, the browser should know the ids of all your things, so that it will just update in the db.
 
-web server API design:
-/reflections/fetch
-required parameters:
-{
-	week:
+next up is the visualization data flow. for now this is easy, we will select a daterange, and query for all reflections of a certain prompt, for that daterange.
+
+===== WEB SERVER API DESIGN =====
+
+based on the above data flows we can define the below endpoints and their relevant functions.
+
+for the write posts page:
+
+GET /write_page/ => returns a write_page json
+required parameters: {
+	user_id:
+	reflection_cutoff_date: // or this can be week identifier, but i think date is more reliable
 }
-if the reflections already exist, return them. if it's a new week, return a set of the user's saved "default set" with blank responses, and create an entry in DB.
 
-/reflections/save
-bind the text field two ways, so that when the user types it will send periodic save requests to the server.
+POST /reflections/:id
 {
-	reflection_id:
 	reflection_body:
 }
 
+for the visualize page:
+
+POST /reflections/
+required parameters: {
+	start_date:
+	end_date:
+}
+this will return all reflections within that date to display. we use POST because GET has no body.
+eventually we could move this to some more efficient design, maybe streaming the results, because it's too slow to send a large chunk.
+
+GET /reflections/:id
+pretty straightforward
+
+for the settings page:
+GET /settings/:user_id
+
+POST /settings/:user_id
+{
+	//new settings object
+}
+
+
+===== CLIENT SIDE RENDERING DESIGN =====
+
+on the client side we will have 3 pages to start with: 1. write page 2. visualize page 3. settings page.
+
+1. write page:
+when user loads this page we will send a request to server, which will return a json as described above. then, for each entry in the [reflections], we will render a reflections template.
+when user clicks save we will send a save request for all reflections.
+
+2. visualize page:
+when user loads this page and selects a daterange we will send a request to server, then we will display the results in a timeline design.
+
+3. settings page:
+when user loads this page we will send a request to get settings, and after editing and saving we will send another request to update in db.
