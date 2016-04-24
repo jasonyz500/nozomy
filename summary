@@ -27,7 +27,7 @@ write_page:
 	user_name: (maybe optional):
 	cutoff_date: // date of the sunday when the reflection will expire
 	week_number: // maybe optional, just for convenience to log which week of the year
-	reflections: [reflections]
+	reflection_ids: [reflection_ids]
 }
 
 the browser will send a request for that week. meanwhile on the server, if it exists it will return it, otherwise it will create a new one using the user's write settings, and return that one.
@@ -93,7 +93,7 @@ this will return all reflections within that date to display.
 eventually we could move this to some more efficient design, maybe streaming the results, because it's too slow to send a large chunk.
 
 GET /reflections/:id
-to get a specific reflection. unsure if this will be used in the app.
+pretty straightforward. returns the reflection with the ID.
 
 for the settings page:
 GET /settings/
