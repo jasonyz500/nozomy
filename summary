@@ -25,8 +25,8 @@ write_page:
 	_id:
 	user_id:
 	user_name: (maybe optional):
-	reflection_cutoff_date: // date of the sunday when the reflection will expire
-	reflection_week_number: // maybe optional, just for convenience to log which week of the year
+	cutoff_date: // date of the sunday when the reflection will expire
+	week_number: // maybe optional, just for convenience to log which week of the year
 	reflections: [reflections]
 }
 
