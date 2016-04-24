@@ -22,6 +22,11 @@ import 'rxjs/Rx';
     component: HomeComponent
   },
   {
+    path: '/write/:cutoffDate',
+    name: 'Write',
+    component: HomeComponent
+  },
+  {
     path: '/about',
     name: 'About',
     component: AboutComponent

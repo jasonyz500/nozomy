@@ -4,30 +4,45 @@ import {Observable} from 'rxjs/Observable';
 import {createAuthHeaders} from './authenticate-requests';
 
 @Injectable()
-export class PostsService {
+export class ReflectionsService {
   constructor(private http: Http) {}
 
   // urlConfig = CONFIG['<%= ENV %>'];
   // urlBase = this.urlConfig.apiServer + ':' + this.urlConfig.apiPort;
   urlBase = 'http://localhost:8000';
 
-  getPosts (queryObj: any) {
-    // perform some validation on queryObj
-    let getPostsUrl = this.urlBase + '/posts';
+  getWritePage(cutoffDate: string) {
+    // todo: perform some validation on queryObj
+    let url = this.urlBase + '/write_page/' + cutoffDate;
     let options = createAuthHeaders();
-    let body = JSON.stringify(queryObj);
     // TODO: Add error handling
-    return this.http
-      .post(getPostsUrl, body, options)
+    return this.http.get(url, options)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
-  savePost(post: any) {
-    let savePostUrl = this.urlBase + '/posts/new';
+  saveReflection(reflection: any) {
+    let url = this.urlBase + '/reflections/' + reflection._id;
     let options = createAuthHeaders();
-    let body = JSON.stringify(post);
-    return this.http.post(savePostUrl, body, options)
+    let body = JSON.stringify(reflection);
+    return this.http.post(url, body, options)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  getReflection(id: string) {
+    let url = this.urlBase + '/reflections/' + id;
+    let options = createAuthHeaders();
+    return this.http.get(url, options)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  getReflections(queryObj: any) {
+    let url = this.urlBase + '/reflections';
+    let options = createAuthHeaders();
+    let body = JSON.stringify(queryObj);
+    return this.http.post(url, body, options)
       .map(res => res.json())
       .catch(this.handleError);
   }

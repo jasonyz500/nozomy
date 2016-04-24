@@ -1,1 +1,1 @@
-export * from './components/reflect.component';
+export * from './components/visualize.component';

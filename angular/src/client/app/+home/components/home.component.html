@@ -1,7 +1,8 @@
 <div *ngIf=isLoggedIn()>
 	<form (ngSubmit)="onSave()">
-		<h2>{{post.question}}</h2>
-		<textarea [(ngModel)]="post.moment" cols="40" style="resize: none"></textarea>
+		<tr *ngFor="#id of model.reflection_ids">
+			<td><reflection [id]="id"></reflection></td>
+		</tr>
 		<button class="btn btn-primary" type="submit">Save</button>
 	</form>
 	<button class="btn btn-primary" (click)=onClickLogout()>Logout</button>
