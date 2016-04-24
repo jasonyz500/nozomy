@@ -71,8 +71,9 @@ note that we don't include the username or user_id in the queries because our au
 
 for the write posts page:
 
-GET /write_page/:reflection_cutoff_date => returns a write_page json
-we use this to load the write page. previous weeks' data can be loaded by changing the call.
+GET /write_page/:cutoff_date => returns a write_page json
+we use this to load the write page. previous weeks' data can be loaded by changing the 'cutoff_date'.
+*maybe we should enable cutoff_date to be anywhere within the week?*
 
 POST /reflections/:id
 {
