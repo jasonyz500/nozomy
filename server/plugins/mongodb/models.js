@@ -25,7 +25,7 @@ models.WritePage = WritePage;
 var WritePageSettingSchema = new Schema({
 	user_id: String,
     user_name:String,
-    reflection_prompts: String,
+    reflection_prompts: [String],
 	last_updated:String
 });
 var WritePageSetting = mongoose.model('WritePageSetting', WritePageSettingSchema);
@@ -35,7 +35,7 @@ var ReflectionSchema = new Schema({
 	user_id: String,
     user_name:String,
     reflection_cutoff_date: String,
-    reflection_prompts: String,
+    reflection_prompt: String,
 	reflection_body:String
 });
 var Reflection = mongoose.model('Reflection', ReflectionSchema);
