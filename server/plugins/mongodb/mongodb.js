@@ -63,3 +63,18 @@ mongodbClient.prototype.createPost = function(params, cb) {
 		}
 	});
 }
+
+mongodbClient.prototype.getWritePageSettings = function(params, cb) {
+	// validate params
+	models.WritePageSetting.findById(id, function(err, settings) {
+    		if (err) {
+    			console.error(err);
+    			cb(null);
+    		} else {
+    			cb(settings);
+    		}
+    	});
+}
+
+
+
