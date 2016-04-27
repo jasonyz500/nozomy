@@ -66,15 +66,68 @@ mongodbClient.prototype.createPost = function(params, cb) {
 
 mongodbClient.prototype.getWritePageSettings = function(params, cb) {
 	// validate params
-	models.WritePageSetting.findById(id, function(err, settings) {
+	/*models.WritePageSetting.findById(id, function(err, settings) {
     		if (err) {
     			console.error(err);
     			cb(null);
     		} else {
     			cb(settings);
     		}
-    	});
+    	});*/
+    	WritePageSetting = {}
+    	WritePageSetting['user_name'] = 'qingzou'
+    	WritePageSetting['reflection_prompts'] = []
+    	WritePageSetting['reflection_prompts'].push('question1')
+    	WritePageSetting['reflection_prompts'].push('question2')
+    return cb(JSON.stringify(WritePageSetting))
 }
+
+mongodbClient.prototype.createReflection = function(params, cb) {
+	// validate params
+	console.log("inside mongodb" + params)
+	var newReflection = new models.Reflection(params);
+	newReflection.save(function (err, res) {
+		if (err) {
+			console.error(err);
+			cb(null);
+		} else {
+			console.log("successfully created reflection " + newReflection._id);
+			cb(newReflection._id);
+		}
+	});
+}
+
+mongodbClient.prototype.getWritePage = function(params, cb) {
+	// validate params
+	models.WritePage.findOne(
+	    {user_name: params['user_name'],
+        cutoff_date: {$gt: '20160101', $lt:params['cutoff_date']}},
+        function(err, writepage) {
+           if (err) {
+              console.error(err);
+                 cb(null);
+              } else {
+                 console.dir('write page ' + JSON.stringify(writepage))
+                 cb(writepage);
+              }
+        });
+}
+
+mongodbClient.prototype.createWritePage = function(params, cb) {
+	// validate params
+	console.log("inside mongodb" + params)
+	var newWritePage = new models.WritePage(params);
+	newWritePage.save(function (err, res) {
+		if (err) {
+			console.error(err);
+			cb(null);
+		} else {
+			console.log("successfully created writepage " + newWritePage._id);
+			cb(newWritePage._id);
+		}
+	});
+}
+
 
 
 
