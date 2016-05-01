@@ -74,6 +74,65 @@ function getWritePage(request, reply) {
 	});
 }
 
+// GET /reflections/:id
+function getSingleReflection(request, reply) {
+	console.log("get single reflection id: " + JSON.stringify(request.params));
+	console.log(request.params.id)
+	mongodb.getSingleReflection(request.params.id, function(response) {
+		reply(response);
+	});
+}
+
+// POST /reflections/:id
+function updateSingleReflection(request, reply) {
+	console.log("update single reflection id: " + JSON.stringify(request.params));
+	console.log("update single reflection payload: " + JSON.stringify(request.payload));
+	mongodb.updateSingleReflection(request.params.id, request.payload.reflection_body, function(response){
+		reply(response)
+	});
+}
+
+// route for GET /settings/
+function getWritePageSettings(request, reply) {
+	user_name = "test_user1"
+	console.log("get write page settings user_name: " + JSON.stringify(user_name));
+	settingparams = {}
+        settingparams['user_name'] = user_name
+	mongodb.getWritePageSettings(settingparams, function(response) {
+		reply(response);
+	});
+}
+
+// route for POST /settings/
+function updateWritePageSettings(request, reply) {
+	user_name = "test_user1"
+	console.log("update write page settings user_name: " + JSON.stringify(user_name));
+	console.log("update write page settings payload: " + JSON.stringify(request.payload));
+	settingparams = {}
+        settingparams['user_name'] = user_name
+        settingparams['reflection_prompts'] = request.payload.reflection_prompts
+	mongodb.updateWritePageSettings(settingparams, function(response) {
+		reply(response);
+	});
+}
+
+//route for GET /reflections
+function getAllReflections(request, reply) {
+	user_name = "test_user1"
+	console.log("get posts payload: "+JSON.stringify(request.payload));
+	console.log(request.payload.start_date);
+	console.log(request.payload.end_date);
+	reflections_params = {}
+	reflections_params['user_name'] = user_name
+	reflections_params['start_date'] = request.payload.start_date
+	reflections_params['end_date'] = request.payload.end_date
+	if (request.payload.reflection_prompt)
+		reflections_params['reflection_prompt'] = request.payload.reflection_prompt
+	mongodb.getAllReflections(reflections_params,  function(response) {
+		reply(response);
+	});
+}
+
 exports.register = function (server, options, next) {
 
 	mongodb = server.plugins.mongodb.mongodbClient;
@@ -100,6 +159,36 @@ exports.register = function (server, options, next) {
         path: '/write_page',
         method: 'POST',
         handler: getWritePage
+    });
+
+    server.route({
+        path: '/reflections/{id}',
+        method: 'POST',
+        handler: updateSingleReflection
+    });
+
+    server.route({
+        path: '/reflections/{id}',
+        method: 'GET',
+        handler: getSingleReflection
+    });
+
+    server.route({
+        path: '/settings/',
+        method: 'POST',
+        handler: updateWritePageSettings
+    });
+
+    server.route({
+        path: '/settings/',
+        method: 'GET',
+        handler: getWritePageSettings
+    });
+
+    server.route({
+        path: '/reflections/',
+        method: 'POST',
+        handler: getAllReflections
     });
 
 	next();
