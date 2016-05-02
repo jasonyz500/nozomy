@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
 	models = require('./models'),
+	moment = require('moment'),
     _ = require('underscore');
 
 var mongodbClient = {};
@@ -126,10 +127,18 @@ mongodbClient.prototype.createReflection = function(params, cb) {
 }
 
 mongodbClient.prototype.getWritePage = function(params, cb) {
+
 	// validate params
+	 currSunday = moment(params['cutoff_date'])
+     var previousSunday = currSunday.subtract(7, 'days')
+     console.log('previous sunday moment is '  + previousSunday)
+     newDate = previousSunday.toDate();
+     console.log('previous sunday date is '  + moment(previousSunday.toDate()).format('YYYY-MM-DD'))
+	 var previousSundayString = moment(previousSunday.toDate()).format('YYYY-MM-DD')
+
 	models.WritePage.findOne(
 	    {user_name: params['user_name'],
-        cutoff_date: {$gt: '20160101', $lt:params['cutoff_date']}},
+        cutoff_date: {$gt: previousSundayString, $lte:params['cutoff_date']}},
         function(err, writepage) {
            if (err) {
               console.error(err);
