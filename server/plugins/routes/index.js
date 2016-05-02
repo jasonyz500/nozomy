@@ -1,3 +1,5 @@
+var moment = require('moment')
+
 //route for GET /posts
 function getAllPosts(request, reply) {
 	console.log("get posts payload: "+JSON.stringify(request.payload));
@@ -24,10 +26,25 @@ function createPost(request, reply) {
 	});
 }
 
-//route for GET /write_page/:cutoff_date
+//route for POST /write_page/:cutoff_date
 function getWritePage(request, reply) {
 	console.log("get cutoff_date: " + JSON.stringify(request.payload));
 	user_name = 'qingzou'
+	try{
+	  var date = moment(request.payload.cutoff_date)
+	  if(! date.isValid()) {
+         reply(request.payload.cutoff_date + ' is not valid date. Please enter a valid date ')
+         return
+      }
+      if ( date.day() != 0 ) {
+         reply(request.payload.cutoff_date + ' is not Sunday. Cutoff date must be Sunday ')
+         return
+      }
+	} catch (e) {
+	     reply(request.payload.cutoff_date + ' is not valid date. Please enter a valid date ')
+         return
+	}
+
     params = {}
 	params['cutoff_date'] = request.payload.cutoff_date
 	params['user_name'] = user_name
@@ -45,7 +62,7 @@ function getWritePage(request, reply) {
 		          console.log('prompt ' + prompt)
 		          reflection = {}
 		          reflection['user_name'] = user_name
-		          reflection['reflection_cutoff_date'] = JSON.stringify(request.payload)
+		          reflection['reflection_cutoff_date'] = request.payload.cutoff_date
 		          reflection['reflection_prompt'] = prompt
 		          reflection['reflection_body'] = ''
 		          mongodb.createReflection(reflection, function(response) {
@@ -56,7 +73,7 @@ function getWritePage(request, reply) {
                           newWritePage = {}
                           newWritePage['user_name']= user_name
                           newWritePage['reflection_ids']= reflection_ids
-                          newWritePage['cutoff_date']= JSON.stringify(request.payload)
+                          newWritePage['cutoff_date']= request.payload.cutoff_date
                           mongodb.createWritePage(newWritePage, function(response) {
                                   console.log('newWritePage id' + response);
                                   newWritePage['id'] = response
