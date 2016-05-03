@@ -3,10 +3,16 @@ import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
 import {Router, RouteParams} from 'angular2/router';
 import {Http} from 'angular2/http';
 
-import {Reflection} from '../../shared/index';
 import {ReflectionsService} from '../../shared/index';
 import {ReflectionComponent} from '../../+reflection/index';
+import {UserService} from '../../+auth/services/user.service';
 import * as moment from 'moment';
+
+import {CanActivate, ComponentInstruction} from 'angular2/router';
+import {isLoggedIn} from '../../+auth/services/is-logged-in';
+@CanActivate((next: ComponentInstruction, previous: ComponentInstruction) => {
+  return isLoggedIn(next, previous);
+})
 
 @Component({
   selector: 'sd-home',
@@ -15,8 +21,11 @@ import * as moment from 'moment';
   directives: [FORM_DIRECTIVES, CORE_DIRECTIVES, ReflectionComponent]
 })
 export class HomeComponent implements OnInit {
-  constructor(private http: Http, private _routeParams: RouteParams,
-    private _reflectionsService: ReflectionsService, private _router: Router) { }
+  auth: any;
+  constructor(private http: Http, private _routeParams: RouteParams, private _userService: UserService,
+    private _reflectionsService: ReflectionsService, private _router: Router) {
+    this.auth = _userService;
+  }
   model: any;
 
   getWeeklyData(cutoffDate: string) {
@@ -35,12 +44,17 @@ export class HomeComponent implements OnInit {
     return !!localStorage.getItem('auth_token');
   }
 
+  onClickLogin() {
+    localStorage.setItem('auth_token', 'myauthtoken');
+  }
+
   onClickLogout() {
-    localStorage.removeItem('auth_token');
+    this.auth.logout();
+    this._router.navigate(['Auth']);
   }
 
   ngOnInit() {
-    let cutoffDate = this._routeParams.get('cutoffDate') || moment().endOf('week').format('YYYY-MM-DD');
+    let cutoffDate = this._routeParams.get('cutoffDate') || moment().add(1, 'weeks').startOf('week').format('YYYY-MM-DD');
     this.getWeeklyData(cutoffDate);
   }
 }

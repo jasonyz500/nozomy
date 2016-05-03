@@ -32,14 +32,15 @@ export class ReflectionsService {
 
   getReflection(id: string) {
     let url = this.urlBase + '/reflections/' + id;
+    console.log(url);
     let options = createAuthHeaders();
     return this.http.get(url, options)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
-  getReflections(queryObj: any) {
-    let url = this.urlBase + '/reflections';
+  getManyReflections(queryObj: any) {
+    let url = this.urlBase + '/reflections/';
     let options = createAuthHeaders();
     let body = JSON.stringify(queryObj);
     return this.http.post(url, body, options)

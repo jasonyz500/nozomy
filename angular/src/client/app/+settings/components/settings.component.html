@@ -1,0 +1,8 @@
+<form *ngIf="model" (ngSubmit)="onSave()">
+	<tr *ngFor="#prompt of model.reflection_prompts">
+		<td>
+			<input />
+		</td>
+	</tr>
+	<button class="btn btn-primary" type="submit">Save</button>
+</form>

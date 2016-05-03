@@ -1,4 +1,4 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit, Input} from 'angular2/core';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
 import {Http} from 'angular2/http';
 
@@ -12,9 +12,9 @@ import {ReflectionsService} from '../../shared/index';
   directives: [FORM_DIRECTIVES, CORE_DIRECTIVES]
 })
 export class ReflectionComponent implements OnInit {
+  @Input() id: string;
   constructor(private http: Http, private _reflectionsService: ReflectionsService) { }
   reflection: Reflection;
-  id: string;
 
   getData(id: string) {
     this._reflectionsService.getReflection(id)
