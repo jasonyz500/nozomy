@@ -135,7 +135,7 @@ mongodbClient.prototype.getWritePageSettings = function(user, cb) {
 				cb(settings);
     		} else {
     			console.log("can't find WritePageSettings, create a default one.")
-    			default_reflection_prompts = ["prompt1", "prompt2"]
+    			default_reflection_prompts = ["What was the highlight of your week?", "What are your goals for next week?"]
 				var newWritePageSetting = new models.WritePageSetting({"username": user.username, "reflection_prompts": default_reflection_prompts});
 				newWritePageSetting.save(function (err, res) {
 					if (err) {
