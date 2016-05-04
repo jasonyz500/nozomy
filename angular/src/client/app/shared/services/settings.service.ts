@@ -12,7 +12,7 @@ export class SettingsService {
   urlBase = 'http://localhost:8000';
 
   getSettingsPage() {
-    let url = this.urlBase + '/settings/' + 'jason'; //eventually use: localStorage.getItem('username');
+    let url = this.urlBase + '/settings/' + localStorage.getItem('username');
     let options = createAuthHeaders();
     // TODO: Add error handling
     return this.http.get(url, options)
@@ -21,7 +21,7 @@ export class SettingsService {
   }
 
   updateSettings(settings: any) {
-    let url = this.urlBase + '/settings/' + 'jason'; //eventually use: localStorage.getItem('username');
+    let url = this.urlBase + '/settings/';
     let options = createAuthHeaders();
     let body = JSON.stringify(settings);
     return this.http.post(url, body, options)

@@ -186,7 +186,7 @@ mongodbClient.prototype.updateWritePageSettings = function(params, user, cb) {
 						cb(null);
 					} else {
 						console.log("successfully update WritePageSetting");
-						cb("successfully update WritePageSetting");
+						cb({"success": true, "message": "successfully update WritePageSetting"});
 					}
 				});
 			}

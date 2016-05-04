@@ -1,8 +1,10 @@
-<form *ngIf="model" (ngSubmit)="onSave()">
-	<tr *ngFor="#prompt of model.reflection_prompts">
-		<td>
-			<input />
-		</td>
-	</tr>
-	<button class="btn btn-primary" type="submit">Save</button>
-</form>
+<h3>Settings Page</h3>
+<div *ngIf="promptsModel">
+	<ul *ngFor="#i of promptsModel">
+		<li>
+			<input [(ngModel)]="i.prompt"/><button class="btn btn-danger" (click)="onClickDelete(i)"><span class="glyphicon glyphicon-minus"></span> Delete This Prompt</button>
+		</li>
+	</ul>
+	<button class="btn btn-success" (click)="onClickAdd()"><span class="glyphicon glyphicon-plus"></span> Add New Prompt</button>
+	<button class="btn btn-primary" (click)="onSave()">Save</button>
+</div>
