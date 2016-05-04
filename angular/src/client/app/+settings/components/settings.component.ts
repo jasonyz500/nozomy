@@ -18,8 +18,8 @@ import {isLoggedIn} from '../../+auth/services/is-logged-in';
   providers: [SettingsService]
 })
 export class SettingsComponent implements OnInit {
-  constructor(private http: Http, private _settingsService: SettingsService) { }
   model: any;
+  constructor(private http: Http, private _settingsService: SettingsService) { }
 
   getData() {
     this._settingsService.getSettingsPage()

@@ -13,8 +13,8 @@ import {ReflectionsService} from '../../shared/index';
 })
 export class ReflectionComponent implements OnInit {
   @Input() id: string;
-  constructor(private http: Http, private _reflectionsService: ReflectionsService) { }
   reflection: Reflection;
+  constructor(private http: Http, private _reflectionsService: ReflectionsService) { }
 
   getData(id: string) {
     this._reflectionsService.getReflection(id)

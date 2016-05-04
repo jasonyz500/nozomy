@@ -22,11 +22,11 @@ import {isLoggedIn} from '../../+auth/services/is-logged-in';
 })
 export class HomeComponent implements OnInit {
   auth: any;
+  model: any;
   constructor(private http: Http, private _routeParams: RouteParams, private _userService: UserService,
     private _reflectionsService: ReflectionsService, private _router: Router) {
     this.auth = _userService;
   }
-  model: any;
 
   getWeeklyData(cutoffDate: string) {
     this._reflectionsService.getWritePage(cutoffDate)

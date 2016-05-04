@@ -16,8 +16,8 @@ import {isLoggedIn} from '../../+auth/services/is-logged-in';
   directives: [FORM_DIRECTIVES, CORE_DIRECTIVES]
 })
 export class VisualizeComponent implements OnInit {
-  constructor(private _router: Router, private _reflectionsService: ReflectionsService) {}
   reflections: any = [];
+  constructor(private _router: Router, private _reflectionsService: ReflectionsService) {}
 
   getReflections() {
     this._reflectionsService.getManyReflections({
