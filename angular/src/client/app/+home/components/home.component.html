@@ -1,7 +1,7 @@
 <div *ngIf=isLoggedIn()>
 	<form *ngIf="model" (ngSubmit)="onSave()">
 		<tr *ngFor="#id of model.reflection_ids">
-			<td><reflection [id]="id"></reflection></td>
+			<td><reflection [id]="id" [changeTrigger]="changeTrigger"></reflection></td>
 		</tr>
 		<button class="btn btn-primary" type="submit">Save</button>
 	</form>

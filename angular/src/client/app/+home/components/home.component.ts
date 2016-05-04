@@ -23,6 +23,7 @@ import {isLoggedIn} from '../../+auth/services/is-logged-in';
 export class HomeComponent implements OnInit {
   auth: any;
   model: any;
+  changeTrigger: number = 1;
   constructor(private http: Http, private _routeParams: RouteParams, private _userService: UserService,
     private _reflectionsService: ReflectionsService, private _router: Router) {
     this.auth = _userService;
@@ -38,6 +39,7 @@ export class HomeComponent implements OnInit {
 
   onSave() {
     console.log('save');
+    this.changeTrigger++;
   }
 
   isLoggedIn(): boolean {

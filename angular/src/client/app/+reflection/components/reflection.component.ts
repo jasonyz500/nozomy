@@ -1,9 +1,11 @@
-import {Component, OnInit, Input} from 'angular2/core';
+import {Component, OnInit, Input, OnChanges} from 'angular2/core';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
 import {Http} from 'angular2/http';
 
 import {Reflection} from '../../shared/index';
 import {ReflectionsService} from '../../shared/index';
+
+import * as _ from 'lodash';
 
 @Component({
   selector: 'reflection',
@@ -11,8 +13,9 @@ import {ReflectionsService} from '../../shared/index';
   styleUrls: ['app/+reflection/components/reflection.component.css'],
   directives: [FORM_DIRECTIVES, CORE_DIRECTIVES]
 })
-export class ReflectionComponent implements OnInit {
+export class ReflectionComponent implements OnInit, OnChanges {
   @Input() id: string;
+  @Input() changeTrigger: number;
   reflection: Reflection;
   constructor(private http: Http, private _reflectionsService: ReflectionsService) { }
 
@@ -33,5 +36,13 @@ export class ReflectionComponent implements OnInit {
 
   ngOnInit() {
     this.getData(this.id);
+  }
+
+
+  ngOnChanges(changes: any) {
+    // some hacky sh&t to trigger changes
+    if (_.has(changes, 'changeTrigger') && this.changeTrigger > 1) {
+      this.save();
+    }
   }
 }

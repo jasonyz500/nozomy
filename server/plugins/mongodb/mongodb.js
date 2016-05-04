@@ -117,7 +117,7 @@ mongodbClient.prototype.updateSingleReflection = function(id, reflection_body, u
 					cb(null);
 				} else {
 					console.log("successfully update reflection body");
-					cb("successfully update reflection body");
+					cb({"success": true, message: "successfully update reflection body"});
 				}
 			})
 		}
