@@ -47,10 +47,9 @@ export class VisualizeComponent implements OnInit, AfterViewChecked {
       jQuery('input[name="daterange"]').on('apply.daterangepicker', function(ev: any, picker: any) {
         _this.dateModel.startDate = moment(picker.startDate).toDate();
         _this.dateModel.endDate = moment(picker.endDate).toDate();
+        _this.getReflections();
       });
       this.initDatePicker = true;
-    } else if (jQuery('input[name="daterange"]').length === 0 && this.initDatePicker) {
-      this.initDatePicker = false;
     }
   }
 }

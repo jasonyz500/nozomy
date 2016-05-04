@@ -2,9 +2,9 @@
 <div *ngIf="promptsModel">
 	<ul *ngFor="#i of promptsModel">
 		<li>
-			<input [(ngModel)]="i.prompt"/><button class="btn btn-danger" (click)="onClickDelete(i)"><span class="glyphicon glyphicon-minus"></span> Delete This Prompt</button>
+			<input [(ngModel)]="i.prompt"/><button class="btn btn-danger" (click)="onClickDelete(i)"><span class="glyphicon glyphicon-minus"></span></button>
 		</li>
 	</ul>
-	<button class="btn btn-success" (click)="onClickAdd()"><span class="glyphicon glyphicon-plus"></span> Add New Prompt</button>
-	<button class="btn btn-primary" (click)="onSave()">Save</button>
+	<button class="btn btn-success" (click)="onClickAdd()"><span class="glyphicon glyphicon-plus"></span> Add New</button>
+	<button class="btn btn-primary" (click)="onSave()"><span class="glyphicon glyphicon-save"></span> Save</button>
 </div>

@@ -8,6 +8,10 @@ p {
   white-space: pre-wrap;
 }
 
+.daterange {
+  display: inline;
+}
+
   .timeline:before {
     top: 0;
     bottom: 0;
@@ -42,6 +46,13 @@ p {
 
     .timeline > li:after {
       clear: both;
+    }
+
+    .timeline > li > .timeline-date {
+      position: relative;
+      display: inline;
+      float: left;
+      right: 50%;
     }
 
     .timeline > li > .timeline-panel {

@@ -1,5 +1,5 @@
 <div *ngIf=isLoggedIn()>
-  <h2>{{name}} Welcome back! Today is {{date}}</h2>
+  <h2>Welcome back {{pageModel.name}}! Today is {{pageModel.date | date}}</h2>
 	<form *ngIf="model" (ngSubmit)="onSave()">
 		<tr *ngFor="#id of model.reflection_ids">
 			<td><reflection [id]="id" [changeTrigger]="changeTrigger"></reflection></td>
