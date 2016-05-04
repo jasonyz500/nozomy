@@ -23,10 +23,10 @@ export class VisualizeComponent implements OnInit, AfterViewChecked {
   private dateModel: any;
   constructor(private _router: Router, private _reflectionsService: ReflectionsService) {}
 
-  getReflections(dateModel: any) {
+  getReflections() {
     this._reflectionsService.getManyReflections({
-      start_date: dateModel.startDate,
-      end_date: dateModel.endDate
+      start_date: moment(this.dateModel.startDate).format('YYYY-MM-DD'),
+      end_date: moment(this.dateModel.endDate).format('YYYY-MM-DD')
     }).subscribe(data => {
       console.log(data);
       this.reflections = data;
@@ -35,9 +35,9 @@ export class VisualizeComponent implements OnInit, AfterViewChecked {
 
   ngOnInit() {
     this.dateModel = {};
-    this.dateModel.startDate = moment().subtract(1, 'weeks').startOf('week').format('YYYY-MM-DD');
-    this.dateModel.endDate = moment().add(1, 'weeks').startOf('week').format('YYYY-MM-DD');
-    this.getReflections(this.dateModel);
+    this.dateModel.startDate = moment().subtract(1, 'weeks').startOf('week').toDate();
+    this.dateModel.endDate = moment().add(1, 'weeks').startOf('week').toDate();
+    this.getReflections();
   }
 
   ngAfterViewChecked() {

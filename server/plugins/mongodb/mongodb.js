@@ -81,7 +81,7 @@ mongodbClient.prototype.getSingleReflection = function(id, user, cb) {
 
 mongodbClient.prototype.getAllReflections = function(params, user, cb) {
 	queryObj = {
-		reflection_cutoff_date: {$gt: params.start_date, $lt:params.end_date}, 
+		reflection_cutoff_date: {$gte: params.start_date, $lte:params.end_date}, 
 		username: user.username
 	};
 	if (params.reflection_prompt) {
