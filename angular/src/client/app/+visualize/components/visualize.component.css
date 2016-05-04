@@ -4,6 +4,10 @@
   position: relative;
 }
 
+p {
+  white-space: pre-wrap;
+}
+
   .timeline:before {
     top: 0;
     bottom: 0;
