@@ -4,25 +4,26 @@ import {UserService} from '../services/user.service';
 
 @Component({
 	selector: 'auth',
-	providers: [UserService],
 	templateUrl: './app/+auth/components/auth.component.html',
 	styleUrls: ['./app/+auth/components/auth.component.css']
 })
 export class AuthComponent implements OnInit {
-	constructor(private _router: Router, private _userService: UserService) { }
+	_userService: any;
+	incorrectLogin: boolean = false;
 
-	// onClickLogin(username, password) {
-	// 	console.log('userService', this._userService.login);
-	// 	this._userService.login(username, password).subscribe((result) => {
-	// 		if (result) {
-	// 			this._router.navigate(['Home']);
-	// 		}
-	// 	});
-	// }
+	constructor(private _router: Router, auth: UserService) {
+		this._userService = auth;
+	}
+
 	onClickLogin(username: string, password: string) {
-		console.log(username, password);
-		localStorage.setItem('auth_token', 'myauthtoken');
-		this._router.navigate(['Home']);
+		this._userService.login(username, password).subscribe((result: any) => {
+			if (result) {
+				this.incorrectLogin = false;
+				this._router.navigate(['Home']);
+			} else {
+				this.incorrectLogin = true;
+			}
+		});
 	}
 
 	ngOnInit() {

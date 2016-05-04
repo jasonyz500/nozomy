@@ -20,6 +20,10 @@ server.register([
         options: {config: config.mongodb}
     },
     {
+        register: require('./plugins/auth'),
+        options: {config: config.auth}
+    },
+    {
         register: require('./plugins/routes')
     }
     ], function (err) {

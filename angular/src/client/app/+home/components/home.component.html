@@ -1,5 +1,5 @@
 <div *ngIf=isLoggedIn()>
-	<form (ngSubmit)="onSave()">
+	<form *ngIf="model" (ngSubmit)="onSave()">
 		<tr *ngFor="#id of model.reflection_ids">
 			<td><reflection [id]="id"></reflection></td>
 		</tr>
