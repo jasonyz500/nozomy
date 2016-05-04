@@ -1,6 +1,7 @@
 <div class="container">
     <div class="page-header">
         <h1 id="timeline">Timeline</h1>
+        <input type="text" name="daterange" value="{{dateModel.startDate}} - {{dateModel.endDate}}" readonly size="23"/>
     </div>
     <ul class="timeline">
       <li *ngFor="#reflection of reflections" class="timeline-inverted">
