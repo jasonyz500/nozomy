@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit {
   auth: any;
   model: any;
   changeTrigger: number = 1;
+  name: string;
+  date: string;
   constructor(private http: Http, private _routeParams: RouteParams, private _userService: UserService,
     private _reflectionsService: ReflectionsService, private _router: Router) {
     this.auth = _userService;
@@ -58,5 +60,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     let cutoffDate = this._routeParams.get('cutoffDate') || moment().add(1, 'weeks').startOf('week').format('YYYY-MM-DD');
     this.getWeeklyData(cutoffDate);
+    this.name = localStorage.getItem('user_name');
+    this.date = moment().format('YYYY-MM-DD')
   }
 }

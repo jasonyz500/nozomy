@@ -1,10 +1,12 @@
 <div *ngIf=isLoggedIn()>
+  <h2>{{name}} Welcome back! Today is {{date}}</h2>
 	<form *ngIf="model" (ngSubmit)="onSave()">
 		<tr *ngFor="#id of model.reflection_ids">
 			<td><reflection [id]="id" [changeTrigger]="changeTrigger"></reflection></td>
 		</tr>
 		<button class="btn btn-primary" type="submit">Save</button>
 	</form>
+  <br>
 	<button class="btn btn-primary" (click)=onClickLogout()>Logout</button>
 </div>
 <div *ngIf=!isLoggedIn()>

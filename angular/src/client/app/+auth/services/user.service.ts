@@ -22,7 +22,9 @@ export class UserService {
 			.map((res) => {
 				if (res.auth_token) {
 					localStorage.setItem('auth_token', res.auth_token);
+					localStorage.setItem('user_name', res.user_name);
 					console.log('auth token:', res.auth_token);
+					console.log('user name:', res.user_name);
 					this.loggedIn = true;
 					return true;
 				}
