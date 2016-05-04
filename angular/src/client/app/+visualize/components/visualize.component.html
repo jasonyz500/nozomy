@@ -1,11 +1,11 @@
 <div class="page-header">
-    <h1 id="timeline">Timeline</h1>
+    <h1 id="timeline" style="display: inline;">Timeline</h1>
     <input class="daterange" type="text" name="daterange" value="{{dateModel.startDate | date:'shortDate'}} - {{dateModel.endDate | date:'shortDate'}}" readonly size="23"/>
 </div>
 <ul class="timeline">
   <li *ngFor="#reflection of reflections" class="timeline-inverted">
     <div class="timeline-date">{{reflection.reflection_cutoff_date}}</div>
-    <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+    <div class="timeline-badge success"><i class="glyphicon glyphicon-check"></i></div>
     <div class="timeline-panel">
       <div class="timeline-heading">
         <h4 class="timeline-title">{{reflection.reflection_prompt}}</h4>

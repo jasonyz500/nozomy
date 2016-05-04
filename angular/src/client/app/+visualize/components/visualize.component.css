@@ -10,6 +10,7 @@ p {
 
 .daterange {
   display: inline;
+  float: right;
 }
 
   .timeline:before {
@@ -50,9 +51,9 @@ p {
 
     .timeline > li > .timeline-date {
       position: relative;
-      display: inline;
+      display: inline-block;
       float: left;
-      right: 50%;
+      left: 37%;
     }
 
     .timeline > li > .timeline-panel {
