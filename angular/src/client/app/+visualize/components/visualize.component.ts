@@ -21,6 +21,7 @@ export class VisualizeComponent implements OnInit, AfterViewChecked {
   reflections: any = [];
   private initDatePicker: boolean;
   private dateModel: any;
+  private showPrompts: boolean = true;
   constructor(private _router: Router, private _reflectionsService: ReflectionsService) {}
 
   getReflections() {

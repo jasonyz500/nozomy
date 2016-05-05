@@ -1,17 +1,12 @@
-<div *ngIf=isLoggedIn()>
-  <h2>Welcome back {{pageModel.name}}! Today is {{pageModel.date | date}}</h2>
-	<form *ngIf="model" (ngSubmit)="onSave()">
-		<tr *ngFor="#id of model.reflection_ids">
-			<td><reflection [id]="id" [changeTrigger]="changeTrigger"></reflection></td>
-		</tr>
-		<button class="btn btn-primary" type="submit">Save</button>
-	</form>
-  <br>
-	<button class="btn btn-primary" (click)=onClickLogout()>Logout</button>
+<div class="page-header">
+	<h2>Welcome back, {{pageModel.name}}!</h2>
+	<p>Today is {{pageModel.date | date:'EEEE, MMMMd'}}. Let's get started on your writing!</p>
 </div>
-<div *ngIf=!isLoggedIn()>
-	<p>
-		Welcome! Some stuff about the app will go here, if/when you are logged in this route will be replaced with the logged in home page.
-	</p>
-	<button class="btn btn-primary" type="submit" (click)=onClickLogin()>Login</button>
-</div>
+<form *ngIf="model" (ngSubmit)="onSave()">
+	<tr *ngFor="#id of model.reflection_ids">
+		<td><reflection [id]="id" [changeTrigger]="changeTrigger"></reflection></td>
+	</tr>
+	<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-save"></span> Save</button>
+</form>
+<br>
+<button class="btn btn-primary" (click)=onClickLogout()>Logout</button>

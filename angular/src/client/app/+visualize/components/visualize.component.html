@@ -8,7 +8,7 @@
     <div class="timeline-badge success"><i class="glyphicon glyphicon-check"></i></div>
     <div class="timeline-panel">
       <div class="timeline-heading">
-        <h4 class="timeline-title">{{reflection.reflection_prompt}}</h4>
+        <h4 class="timeline-title" *ngIf="showPrompts">{{reflection.reflection_prompt}}</h4>
       </div>
       <div class="timeline-body">
         <p>{{reflection.reflection_body}}</p>

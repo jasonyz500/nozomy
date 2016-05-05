@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
     let cutoffDate = this._routeParams.get('cutoffDate') || moment().add(1, 'weeks').startOf('week').format('YYYY-MM-DD');
     this.getWeeklyData(cutoffDate);
     this.pageModel = {};
-    this.pageModel.name = localStorage.getItem('username');
+    this.pageModel.name = localStorage.getItem('first_name');
     this.pageModel.date = moment().toDate();
   }
 }

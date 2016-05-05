@@ -23,8 +23,7 @@ export class UserService {
 				if (res.auth_token) {
 					localStorage.setItem('auth_token', res.auth_token);
 					localStorage.setItem('username', res.username);
-					console.log('auth token:', res.auth_token);
-					console.log('user name:', res.user_name);
+					localStorage.setItem('first_name', res.first_name);
 					this.loggedIn = true;
 					return true;
 				}

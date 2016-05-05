@@ -25,7 +25,7 @@ function login(request, reply) {
 		var user = {};
 		user.username = 'jason';
 		var token = jwt.sign({user: user}, privateKey, {algorithm: 'HS256'});
-		return reply({auth_token: token, username: user.username});
+		return reply({auth_token: token, username: user.username, first_name: 'Jason'});
 	}
 	reply({error: 'invalid credentials'});
 }

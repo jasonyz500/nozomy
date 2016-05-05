@@ -61,6 +61,27 @@ when you write a new reflection and save it, the browser should know the ids of 
 
 next up is the visualization data flow. for now this is easy, we will select a daterange, and query for all reflections of a certain prompt, for that daterange.
 
+EDIT: in order to support a more sophisticated timeline view we will edit the timeline return object to look something like this:
+[{
+	year: 2016
+	show_year: false // true for everything except first year?
+	months: {
+		may: [
+			{
+				display_date_range: "02-08",
+				week_number: 20,
+				reflections: [some reflections...]
+			},
+			{
+				....
+			}
+		],
+		april: [...]
+	}
+}]
+
+in the future we will want a streaming API for this, which will need a different data model.
+
 ===== WEB SERVER API DESIGN =====
 
 based on the above data flows we can define the below endpoints and their relevant functions.
