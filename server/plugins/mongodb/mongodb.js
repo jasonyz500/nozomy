@@ -87,7 +87,7 @@ mongodbClient.prototype.getAllReflections = function(params, user, cb) {
 	if (params.reflection_prompt) {
 		queryObj.reflection_prompt = { $in : params.reflection_prompt };
 	}
-	models.Reflection.find(queryObj, function (err, reflections) {
+	models.Reflection.find(queryObj).sort('-reflection_cutoff_date').exec(function (err, reflections) {
 		if (err) {
 			console.error(err);
 			cb(null);

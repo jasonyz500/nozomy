@@ -1,5 +1,6 @@
 import {Component, OnInit, AfterViewChecked} from 'angular2/core';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
+import { InfiniteScroll } from 'angular2-infinite-scroll';
 import {Router} from 'angular2/router';
 import {ReflectionsService} from '../../shared/services/reflections.service';
 declare var jQuery: any;
@@ -15,7 +16,7 @@ import {isLoggedIn} from '../../+auth/services/is-logged-in';
   selector: 'visualize',
   templateUrl: 'app/+visualize/components/visualize.component.html',
   styleUrls: ['app/+visualize/components/visualize.component.css'],
-  directives: [FORM_DIRECTIVES, CORE_DIRECTIVES]
+  directives: [FORM_DIRECTIVES, CORE_DIRECTIVES, InfiniteScroll]
 })
 export class VisualizeComponent implements OnInit, AfterViewChecked {
   reflections: any = [];
@@ -32,6 +33,11 @@ export class VisualizeComponent implements OnInit, AfterViewChecked {
       console.log(data);
       this.reflections = data;
     }, error => console.error(error));
+  }
+
+  onScroll(event: any) {
+    console.log(event);
+    console.log('scrolled!');
   }
 
   ngOnInit() {
