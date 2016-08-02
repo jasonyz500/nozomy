@@ -80,6 +80,8 @@ EDIT: in order to support a more sophisticated timeline view we will edit the ti
 	}
 }]
 
+the request should accept a start date as a parameter.
+
 in the future we will want a streaming API for this, which will need a different data model.
 
 ===== WEB SERVER API DESIGN =====
