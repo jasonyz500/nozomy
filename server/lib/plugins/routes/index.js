@@ -3,7 +3,7 @@ var moment = require('moment'),
 
 //route for GET /write_page/:cutoff_date
 function getWritePage(request, reply) {
-	cutoff_date = request.params.cutoff_date;
+	var cutoff_date = request.params.cutoff_date;
 
 	// validation
 	try {
@@ -92,7 +92,7 @@ function getAllReflections(request, reply) {
 
 exports.register = function (server, options, next) {
 
-	mongodb = server.plugins.mongodb.mongodbClient;
+	var mongodb = server.plugins.mongodb.mongodbClient;
 
 	server.route({
         path: '/write_page/{cutoff_date}',

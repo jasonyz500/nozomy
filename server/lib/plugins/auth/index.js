@@ -31,7 +31,7 @@ function login(request, reply) {
 }
 
 exports.register = function(server, options, next) {
-	mongodb = server.plugins.mongodb.mongodbClient;
+	// mongodb = server.plugins.mongodb.mongodbClient;
 
 	server.register(hapiAuthJwt, (err) => {
 		server.auth.strategy('token', 'jwt', {

@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
 	models = require('./models'),
 	moment = require('moment'),
 	Boom = require('boom'),
-    _ = require('underscore');
+    _ = require('lodash');
 
 var mongodbClient = {};
 module.exports = mongodbClient = function(options) {
@@ -17,12 +17,12 @@ module.exports = mongodbClient = function(options) {
 mongodbClient.prototype.getWritePage = function(params, user, cb) {
 
 	// validate params
-	 currSunday = moment(params['cutoff_date'])
-     var previousSunday = currSunday.subtract(7, 'days')
-     console.log('previous sunday moment is '  + previousSunday)
+	 var currSunday = moment(params['cutoff_date']);
+     var previousSunday = currSunday.subtract(7, 'days');
+     console.log('previous sunday moment is '  + previousSunday);
      newDate = previousSunday.toDate();
-     console.log('previous sunday date is '  + moment(previousSunday.toDate()).format('YYYY-MM-DD'))
-	 var previousSundayString = moment(previousSunday.toDate()).format('YYYY-MM-DD')
+     console.log('previous sunday date is '  + moment(previousSunday.toDate()).format('YYYY-MM-DD'));
+	 var previousSundayString = moment(previousSunday.toDate()).format('YYYY-MM-DD');
 
 	models.WritePage.findOne(
 	    {username: user.username,
@@ -80,7 +80,7 @@ mongodbClient.prototype.getSingleReflection = function(id, user, cb) {
 }
 
 mongodbClient.prototype.getAllReflections = function(params, user, cb) {
-	queryObj = {
+	var queryObj = {
 		reflection_cutoff_date: {$gte: params.start_date, $lte:params.end_date}, 
 		username: user.username
 	};
@@ -149,23 +149,6 @@ mongodbClient.prototype.getWritePageSettings = function(user, cb) {
     		}
     	}
 	});
-	// validate params
-	/*models.WritePageSetting.findById(id, function(err, settings) {
-    		if (err) {
-    			console.error(err);
-    			cb(null);
-    		} else {
-    			cb(settings);
-    		}
-    	});*/
-    /*
-    	WritePageSetting = {}
-    	WritePageSetting['username'] = 'qingzou'
-    	WritePageSetting['reflection_prompts'] = []
-    	WritePageSetting['reflection_prompts'].push('question1')
-    	WritePageSetting['reflection_prompts'].push('question2')
-    return cb(JSON.stringify(WritePageSetting))
-    */
 }
 
 mongodbClient.prototype.updateWritePageSettings = function(params, user, cb) {
