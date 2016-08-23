@@ -1,7 +1,7 @@
-var Hapi = require('hapi'),
+const Hapi = require('hapi'),
     config = require('./config');
 
-var server = new Hapi.Server();
+const server = new Hapi.Server();
    
 server.connection({ port: 8000, host: '0.0.0.0', routes: { cors: {"headers": ["Accept", "Authorization", "Content-Type", "If-None-Match", "Accept-language"]}}});
 
@@ -16,22 +16,28 @@ server.route({
 
 server.register([
     {
-        register: require('./plugins/mongodb'),
-        options: {config: config.mongodb}
+        register: require('good'),
+        options: config.goodOptions
     },
+    { register: require('blipp') },
     {
-        register: require('./plugins/auth'),
-        options: {config: config.auth}
+        register: require('./middlewares/mongodb'),
+        options: config.mongodb
     },
-    {
-        register: require('./plugins/routes')
-    }
+    { register: require('./models') },
+    { register: require('./middlewares/auth') },
+    { register: require('./routes/reflections') },
+    { register: require('./routes/settings') },
+    { register: require('./routes/write-page') }
+
     ], function (err) {
         if (err) {
-            console.log('error loading plugin');
+            console.error('error loading plugin: ', err);
         }
+        server.start(() => {
+            server.log(['info'], 'Server running at: '+server.info.uri);
+            server.emit('pluginsLoaded');
+    });
 });
 
-server.start(() => {
-    console.log('Server running at:', server.info.uri);
-});
+module.exports = server;
