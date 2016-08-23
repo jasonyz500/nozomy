@@ -1,4 +1,6 @@
-var config = module.exports = {};
+'use strict';
+
+let config = module.exports = {};
 
 config.env = 'prod';
 

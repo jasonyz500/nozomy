@@ -1,9 +1,11 @@
-var mongoose = require('mongoose'),
+'use strict';
+
+let mongoose = require('mongoose'),
 	Boom = require('boom'),
     _ = require('lodash');
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
-var userSchema = new Schema({
+let userSchema = new Schema({
 	username: String,
 	department: String,
 	given_name: String,
@@ -12,16 +14,16 @@ var userSchema = new Schema({
 	last_login: String
 });
 
-var User = mongoose.model('User', userSchema);
+let User = mongoose.model('User', userSchema);
 
-var userModel = {};
+let userModel = {};
 
 userModel.createOrUpdateUserLogin = function(params, cb) {
 	User.findOne({username: params.username}, function(err, user) {
 		if (err) {
 			console.error(err);
 		} else if (!user) {
-			var newUser = new models.User(params);
+			let newUser = new models.User(params);
 			newUser.save(function (err, res) {
 				if (err) {
 					console.error(err);
@@ -32,7 +34,7 @@ userModel.createOrUpdateUserLogin = function(params, cb) {
 				}
 			});
 		} else {
-			for (var key in params) {
+			for (let key in params) {
 				user[key] = params[key];
 			}
 			user.save(function(err) {

@@ -1,9 +1,11 @@
-var mongoose = require('mongoose');
+'use strict';
+
+let mongoose = require('mongoose');
 
 exports.register = function (server, options, next) {
 
   mongoose.connect('mongodb://' + options.host + '/' + options.db);
-  var mongodb = mongoose.connection;
+  let mongodb = mongoose.connection;
   mongodb.on('error', () => {
     server.log(['error', 'database'], 'mongodb connection error!');
   });

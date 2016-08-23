@@ -19,7 +19,7 @@ let reflectionsModel = {};
 
 reflectionsModel.createReflection = function(params, user, cb) {
 	// validate params
-	var newReflection = new Reflection(params);
+	let newReflection = new Reflection(params);
 	newReflection.username = user.username;
 	newReflection.save(function (err, res) {
 		if (err) {
@@ -44,7 +44,7 @@ reflectionsModel.getSingleReflection = function(id, user, cb) {
 }
 
 reflectionsModel.getAllReflections = function(params, user, cb) {
-	var queryObj = {
+	let queryObj = {
 		reflection_cutoff_date: {$gte: params.start_date, $lte:params.end_date}, 
 		username: user.username
 	};

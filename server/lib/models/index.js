@@ -1,3 +1,5 @@
+'use strict';
+
 const usersModel = require('./users'),
 	reflectionsModel = require('./reflections'),
 	writePageModel = require('./write-page'),

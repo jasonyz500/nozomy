@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose'),
 	Boom = require('boom'),
+	moment = require('moment'),
     _ = require('lodash');
 
 const Schema = mongoose.Schema;
@@ -19,12 +20,12 @@ let writePageModel = {};
 writePageModel.getWritePage = function(params, user, cb) {
 
 	// validate params
-	 var currSunday = moment(params['cutoff_date']);
-     var previousSunday = currSunday.subtract(7, 'days');
+	 let currSunday = moment(params['cutoff_date']);
+     let previousSunday = currSunday.subtract(7, 'days');
      console.log('previous sunday moment is '  + previousSunday);
-     newDate = previousSunday.toDate();
+     let newDate = previousSunday.toDate();
      console.log('previous sunday date is '  + moment(previousSunday.toDate()).format('YYYY-MM-DD'));
-	 var previousSundayString = moment(previousSunday.toDate()).format('YYYY-MM-DD');
+	 let previousSundayString = moment(previousSunday.toDate()).format('YYYY-MM-DD');
 
 	WritePage.findOne(
 	    {username: user.username,
@@ -41,7 +42,7 @@ writePageModel.getWritePage = function(params, user, cb) {
 }
 
 writePageModel.createWritePage = function(params, user, cb) {
-	var newWritePage = new WritePage(params);
+	let newWritePage = new WritePage(params);
 	newWritePage.username = user.username;
 	newWritePage.save(function (err, res) {
 		if (err) {

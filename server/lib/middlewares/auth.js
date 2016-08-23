@@ -1,4 +1,6 @@
-var jwt = require('jsonwebtoken'),
+'use strict';
+
+let jwt = require('jsonwebtoken'),
 	hapiAuthJwt = require('hapi-auth-jwt');
 
 const privateKey = 'josephiana';
@@ -16,15 +18,15 @@ function validate(request, decoded, callback) {
 }
 
 function login(request, reply) {
-	var username = request.payload.username || '';
-	var password = request.payload.password || '';
+	let username = request.payload.username || '';
+	let password = request.payload.password || '';
 	console.log('username: ', username);
 
 	if (username == 'jason' && password == 'jason') {
 		console.log('p1');
-		var user = {};
+		let user = {};
 		user.username = 'jason';
-		var token = jwt.sign({user: user}, privateKey, {algorithm: 'HS256'});
+		let token = jwt.sign({user: user}, privateKey, {algorithm: 'HS256'});
 		return reply({auth_token: token, username: user.username, first_name: 'Jason'});
 	}
 	reply({error: 'invalid credentials'});

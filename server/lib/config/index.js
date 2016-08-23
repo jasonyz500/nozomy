@@ -1,4 +1,6 @@
-var env = process.env.NOZOMY_ENV || 'development',
+'use strict';
+
+let env = process.env.NOZOMY_ENV || 'development',
 	cfg = require('./config.' + env);
 
 module.exports = cfg

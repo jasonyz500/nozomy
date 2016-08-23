@@ -14,10 +14,10 @@ let SettingsSchema = new Schema({
 });
 let Settings = mongoose.model('Settings', SettingsSchema);
 
-let settingsModel = Settings;
+let settingsModel = {};
 
 settingsModel.getWritePageSettings = function(user, cb) {
-	models.WritePageSetting.findOne({ 'username': user.username }, function (err, settings) {
+	Settings.findOne({ 'username': user.username }, function (err, settings) {
 		if (err) {
     		console.error(err);
     		cb(null);
@@ -27,8 +27,8 @@ settingsModel.getWritePageSettings = function(user, cb) {
 				cb(settings);
     		} else {
     			console.log("can't find WritePageSettings, create a default one.")
-    			default_reflection_prompts = ["What was the highlight of your week?", "What are your goals for next week?"]
-				var newWritePageSetting = new models.WritePageSetting({"username": user.username, "reflection_prompts": default_reflection_prompts});
+    			let default_reflection_prompts = ["What was the highlight of your week?", "What are your goals for next week?"]
+				let newWritePageSetting = new Settings({"username": user.username, "reflection_prompts": default_reflection_prompts});
 				newWritePageSetting.save(function (err, res) {
 					if (err) {
 						console.error(err);
@@ -44,7 +44,7 @@ settingsModel.getWritePageSettings = function(user, cb) {
 }
 
 settingsModel.updateWritePageSettings = function(params, user, cb) {
-	models.WritePageSetting.findOne({ 'username': user.username }, function(err, setting) {
+	Settings.findOne({ 'username': user.username }, function(err, setting) {
 		if (err) {
 			console.error(err);
 			cb(null);

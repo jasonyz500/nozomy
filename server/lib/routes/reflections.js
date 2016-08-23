@@ -39,7 +39,8 @@ exports.register = function (server, options, next) {
 		config: {
 			auth: 'token',
 			handler: function(request, reply) {
-				mongodb.getAllReflections(request.payload, request.auth.credentials, function(response) {
+				request.log(['info'], 'POST /reflections/ with payload: ' + JSON.stringify(request.payload));
+				reflectionsModel.getAllReflections(request.payload, request.auth.credentials, function(response) {
 					reply(response);
 				});
 			},
@@ -56,7 +57,7 @@ exports.register = function (server, options, next) {
 				params: { id: joiId.required() }
 			},
 			handler: function(request, reply) {
-				mongodb.updateSingleReflection(request.params.id, request.payload.reflection_body, request.auth.credentials, function(response){
+				reflectionsModel.updateSingleReflection(request.params.id, request.payload.reflection_body, request.auth.credentials, function(response){
 					reply(response)
 				});
 			},
