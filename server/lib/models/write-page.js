@@ -20,12 +20,12 @@ let writePageModel = {};
 writePageModel.getWritePage = function(params, user, cb) {
 
 	// validate params
-	 let currSunday = moment(params['cutoff_date']);
-     let previousSunday = currSunday.subtract(7, 'days');
-     console.log('previous sunday moment is '  + previousSunday);
-     let newDate = previousSunday.toDate();
-     console.log('previous sunday date is '  + moment(previousSunday.toDate()).format('YYYY-MM-DD'));
-	 let previousSundayString = moment(previousSunday.toDate()).format('YYYY-MM-DD');
+	let currSunday = moment(params['cutoff_date']);
+	let previousSunday = currSunday.subtract(7, 'days');
+	console.log('previous sunday moment is '  + previousSunday);
+	let newDate = previousSunday.toDate();
+	console.log('previous sunday date is '  + moment(previousSunday.toDate()).format('YYYY-MM-DD'));
+	let previousSundayString = moment(previousSunday.toDate()).format('YYYY-MM-DD');
 
 	WritePage.findOne(
 	    {username: user.username,
